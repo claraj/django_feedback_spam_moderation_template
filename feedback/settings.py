@@ -11,15 +11,6 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
 from pathlib import Path
-import os 
-
-RUNNING_AT_GCP = 'GAE_INSTANCE' in os.environ
-
-GCP_PROJECT = os.getenv('GOOGLE_CLOUD_PROJECT')
-GCP_REGION = 'us-central1'
-BASE_URL = 'https://gen-lang-client-0989552802.uc.r.appspot.com'
-
-MODERATION_TASK_SECRET = os.getenv('MODERATION_TASK_SECRET')
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -81,28 +72,12 @@ WSGI_APPLICATION = 'feedback.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
-
-
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'HOST': '/cloudsql/gen-lang-client-0989552802:us-central1:feedback',
-        'PORT': '3306',
-        'NAME': 'feedback',
-        'USER': 'feedback_user',
-        'PASSWORD': os.getenv('DB_PASSWORD')
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-
-if not RUNNING_AT_GCP:
-    DATABASES['default']['HOST'] = '127.0.0.1'
-
 
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators

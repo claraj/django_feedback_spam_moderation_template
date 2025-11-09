@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from .forms import FeedbackForm
 from django.http import HttpResponseNotAllowed
-from .moderation_views import create_moderation_task
+
 
 def feedback_form(request):
     feedback_form = FeedbackForm()
@@ -16,7 +16,9 @@ def send_feedback(request):
         feedback = form.save()  # make new feedback object in memory, not in DB
         if form.is_valid():
             feedback.save()   # Save to the database
-            create_moderation_task(feedback.pk)   # Send the ID of the feedback object saved to the database 
+            
+            # TODO start moderation task
+
             return redirect('thank_you')
         else:
             return redirect('send_feedback')  # back to home page 
