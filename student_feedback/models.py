@@ -7,8 +7,12 @@ class Feedback(models.Model):
     approved = models.BooleanField(null=False, default=False)
 
     def __str__(self):
-        # Display the first 100 characters of the text to save space
-        return f'Review Text: {self.text[:100]}, Date: {self.date_submitted}, Approved: {self.approved}'
+        # Display 'anonymous' if the user does not enter an email 
+        # Display no more than the first 50 characters of the text to save space in the string representation
+        # The full text will be saved in the database and can be viewed in the details for an individual feedback in the admin console
+        email = self.email if self.email else 'anonymous'
+        return f'Review Text: {self.text[:50]}, Date: {self.date_submitted}, email: {email}, Status: {self.STATUS_CHOICES[self.status]}'
+    
     
 
 
