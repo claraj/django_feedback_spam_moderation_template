@@ -21,7 +21,7 @@ def send_feedback(request):
 
             return redirect('thank_you')
         else:
-            return redirect('send_feedback')  # back to home page 
+            return redirect('feedback_form')  # back to home page 
 
 
 def thank_you(request):
